@@ -39,10 +39,9 @@ BioStructureExplorer/
 
 ### Running the Visualization
 
-1. Open `visualization/index.html` in your web browser
-2. Click on any module card to explore it
-3. Sample data is automatically loaded when you open each module
-4. Optionally upload your own data files for analysis
+1. Locate to repository folder.
+2. Run command  python -m http.server 8000  in terminal.
+3. Go to `http://localhost:8000/visualization/index.html` to see the project.
 
 ### Building the C++ Engine
 

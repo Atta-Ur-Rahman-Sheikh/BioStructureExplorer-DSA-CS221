@@ -13,3 +13,5 @@
 95	2194	7879730970070865	CMakeFiles/BioStructureExplorer.dir/engine/graph/graph_analyzer.cpp.obj	5915df33b69e5f46
 84	2470	7879730969952338	CMakeFiles/BioStructureExplorer.dir/engine/evolution/mutation_simulator.cpp.obj	3e5a58aa8dcfb7e6
 2472	2844	7879730993850515	BioStructureExplorer.exe	18470df8e03e2d10
+40	3760	7880015672455514	CMakeFiles/BioStructureExplorer.dir/main.cpp.obj	1cb801129bda6ed6
+3760	4082	7880015709665237	BioStructureExplorer.exe	18470df8e03e2d10
