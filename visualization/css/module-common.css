@@ -1,0 +1,410 @@
+/* ==============================
+   Common Module Styles
+   ============================== */
+
+:root {
+  --bg-main: #2C3930;
+  --bg-panel: #3F4F44;
+  --bg-light: #F5F7FA;
+  --accent: #A27B5C;
+  --accent2: #2ECC71;
+  --text-main: #DCD7C9;
+  --text-muted: #B0A394;
+  --radius: 12px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+}
+
+body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+}
+
+html {
+    background-color: var(--bg-main);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-main);
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 5px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #8B6B4F;
+}
+
+/* Module Container */
+.module-container {
+    padding: 1rem;
+    max-width: 1400px;
+    margin: 1rem auto;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header */
+h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(90deg, #A27B5C, #DCD7C9);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+}
+
+.module-description {
+    font-size: 1rem;
+    color: #B0A394;
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    max-width: 900px;
+}
+
+/* Controls Panel */
+.controls-panel {
+    background: linear-gradient(135deg, #3F4F44 0%, #2E3A34 100%);
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    margin-bottom: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-items: center;
+    border: 1px solid rgba(162, 123, 92, 0.2);
+}
+
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.control-group label {
+    font-size: 0.95rem;
+    color: #DCD7C9;
+    font-weight: 500;
+}
+
+.control-group input[type="file"],
+.control-group input[type="text"],
+.control-group select {
+    border: 1px solid rgba(162, 123, 92, 0.3);
+    padding: 0.75rem;
+    border-radius: 8px;
+    background-color: #2C3930;
+    color: #DCD7C9;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+.control-group input[type="file"]:focus,
+.control-group input[type="text"]:focus,
+.control-group select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(162, 123, 92, 0.2);
+}
+
+/* Results Container */
+.results-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 0.75rem;
+}
+
+/* Stats Panel */
+.stats-panel {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 0.75rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #3F4F44 0%, #2E3A34 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 1rem 0.75rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(162, 123, 92, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.stat-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.stat-card:hover::before {
+    opacity: 1;
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(162, 123, 92, 0.2), rgba(162, 123, 92, 0.1));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #A27B5C;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(162, 123, 92, 0.2);
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover .stat-icon {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(162, 123, 92, 0.3);
+}
+
+.stat-content h3 {
+    font-size: 0.85rem;
+    color: #DCD7C9;
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+}
+
+.stat-value {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #A27B5C;
+    line-height: 1.2;
+}
+
+/* Visualization Panel */
+.visualization-panel {
+    background: linear-gradient(135deg, #3F4F44 0%, #2E3A34 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    padding: 0.75rem;
+    border: 1px solid rgba(162, 123, 92, 0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 0;
+}
+
+.visualization-panel h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+    color: var(--accent);
+    font-weight: 600;
+    border-bottom: 2px solid rgba(162, 123, 92, 0.3);
+    padding-bottom: 0.5rem;
+    letter-spacing: 0.5px;
+}
+
+#dna-viz-container, #graph-viz-container, #evolution-viz-container, #protein-viz {
+    position: relative;
+    height: calc(100vh - 350px);
+    min-height: 600px;
+    background: linear-gradient(135deg, #2E3A34 0%, #1F2823 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 20px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2);
+    border: 1px solid rgba(162, 123, 92, 0.2);
+    flex-shrink: 0;
+}
+
+#evolution-viz-container {
+    background: linear-gradient(135deg, #2E3A34 0%, #1F2823 100%);
+}
+
+.viz-panel {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: visible;
+}
+
+.viz-panel.active {
+    display: block !important;
+    visibility: visible !important;
+}
+
+/* Special handling for DNA 2D visualization */
+#dna-2d-viz.active {
+    display: block !important;
+    visibility: visible !important;
+    position: absolute !important;
+    overflow: hidden;
+}
+
+/* Traversal Panel */
+.traversal-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.traversal-box {
+    background: linear-gradient(135deg, #3F4F44 0%, #2E3A34 100%);
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border: 1px solid rgba(162, 123, 92, 0.15);
+    transition: all 0.3s ease;
+}
+
+.traversal-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.traversal-box h3 {
+    margin-bottom: 1rem;
+    color: #A27B5C;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid rgba(162, 123, 92, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.traversal-box ul {
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    padding: 0;
+    margin: 0;
+}
+
+.traversal-box ul li {
+    padding: 0.5rem 0.75rem;
+    margin: 0.25rem 0;
+    border-radius: 6px;
+    border-bottom: 1px solid rgba(46, 58, 52, 0.5);
+    color: #DCD7C9;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.traversal-box ul li:hover {
+    background: rgba(162, 123, 92, 0.15);
+    transform: translateX(5px);
+    border-left: 3px solid var(--accent);
+    padding-left: 0.5rem;
+}
+
+/* Buttons */
+button, .control-btn {
+    background: linear-gradient(135deg, var(--accent) 0%, #8B6B4F 100%);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(162, 123, 92, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+button::before, .control-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+button:hover::before, .control-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+button:hover, .control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(162, 123, 92, 0.4);
+}
+
+button:active, .control-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(162, 123, 92, 0.3);
+}
+
+button i, .control-btn i {
+    margin-right: 0.5rem;
+}
+
+/* Secondary button styles */
+button.secondary, .control-btn.secondary {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    box-shadow: 0 4px 12px rgba(149, 165, 166, 0.3);
+}
+
+button.secondary:hover, .control-btn.secondary:hover {
+    box-shadow: 0 6px 20px rgba(149, 165, 166, 0.4);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+    .results-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .traversal-panel {
+        order: 2;
+    }
+    
+    .visualization-panel {
+        order: 1;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .results-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .stats-panel {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+    
+    #dna-viz-container, #graph-viz-container, #evolution-viz-container, #protein-viz {
+        height: 500px !important;
+        min-height: 500px !important;
+    }
+}

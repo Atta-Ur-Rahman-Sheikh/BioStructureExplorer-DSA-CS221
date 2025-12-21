@@ -1,0 +1,68 @@
+HEADER    HYDROLASE                               21-OCT-03   1T2H              
+TITLE     SOLUTION STRUCTURE OF THE COMPLEX BETWEEN THE N-TERMINAL DOMAIN OF      
+TITLE    2 ENZYME I AND THE HISTIDINE-CONTAINING PHOSPHOCARRIER PROTEIN          
+TITLE    3 (HPR) FROM ESCHERICHIA COLI                                           
+COMPND    MOL_ID: 1;                                                            
+COMPND   2 MOLECULE: PHOSPHOENOLPYRUVATE-PROTEIN PHOSPHOTRANSFERASE;             
+COMPND   3 CHAIN: A;                                                             
+COMPND   4 FRAGMENT: N-TERMINAL DOMAIN;                                          
+COMPND   5 EC: 2.7.3.9;                                                          
+COMPND   6 ENGINEERED: YES                                                       
+SOURCE    MOL_ID: 1;                                                            
+SOURCE   2 ORGANISM_SCIENTIFIC: ESCHERICHIA COLI;                                
+SOURCE   3 ORGANISM_COMMON: E. COLI;                                             
+SOURCE   4 ORGANISM_TAXID: 562;                                                  
+SOURCE   5 GENE: PTS;                                                            
+SOURCE   6 EXPRESSION_SYSTEM: ESCHERICHIA COLI;                                  
+SOURCE   7 EXPRESSION_SYSTEM_TAXID: 562                                          
+ATOM      1  N   MET A   1      21.937  -0.041  -0.490  1.00  0.00           N  
+ATOM      2  CA  MET A   1      22.242   1.395  -0.641  1.00  0.00           C  
+ATOM      3  C   MET A   1      21.073   2.248  -0.108  1.00  0.00           C  
+ATOM      4  O   MET A   1      20.111   1.740   0.450  1.00  0.00           O  
+ATOM      5  CB  MET A   1      22.577   1.711  -2.099  1.00  0.00           C  
+ATOM      6  CG  MET A   1      23.776   0.941  -2.654  1.00  0.00           C  
+ATOM      7  SD  MET A   1      24.275   1.430  -4.314  1.00  0.00           S  
+ATOM      8  CE  MET A   1      24.669  -0.162  -5.011  1.00  0.00           C  
+ATOM      9  N   SER A   2      21.165   3.560  -0.291  1.00  0.00           N  
+ATOM     10  CA  SER A   2      20.154   4.523   0.148  1.00  0.00           C  
+ATOM     11  C   SER A   2      20.113   5.678  -0.850  1.00  0.00           C  
+ATOM     12  O   SER A   2      21.023   5.847  -1.657  1.00  0.00           O  
+ATOM     13  CB  SER A   2      20.450   5.036   1.557  1.00  0.00           C  
+ATOM     14  OG  SER A   2      19.431   5.913   1.998  1.00  0.00           O  
+ATOM     15  N   LEU A   3      19.049   6.483  -0.790  1.00  0.00           N  
+ATOM     16  CA  LEU A   3      18.899   7.614  -1.702  1.00  0.00           C  
+ATOM     17  C   LEU A   3      17.999   8.667  -1.068  1.00  0.00           C  
+ATOM     18  O   LEU A   3      17.198   8.361  -0.183  1.00  0.00           O  
+ATOM     19  CB  LEU A   3      18.308   7.147  -3.036  1.00  0.00           C  
+ATOM     20  CG  LEU A   3      16.782   7.001  -3.049  1.00  0.00           C  
+ATOM     21  CD1 LEU A   3      16.284   6.467  -4.384  1.00  0.00           C  
+ATOM     22  CD2 LEU A   3      16.122   8.338  -2.738  1.00  0.00           C  
+ATOM     23  N   LYS A   4      18.156   9.913  -1.510  1.00  0.00           N  
+ATOM     24  CA  LYS A   4      17.360  11.010  -0.977  1.00  0.00           C  
+ATOM     25  C   LYS A   4      16.159  11.236  -1.881  1.00  0.00           C  
+ATOM     26  O   LYS A   4      16.296  11.358  -3.099  1.00  0.00           O  
+ATOM     27  CB  LYS A   4      18.208  12.279  -0.865  1.00  0.00           C  
+ATOM     28  CG  LYS A   4      19.289  12.171   0.201  1.00  0.00           C  
+ATOM     29  CD  LYS A   4      20.118  13.442   0.249  1.00  0.00           C  
+ATOM     30  CE  LYS A   4      21.183  13.359   1.335  1.00  0.00           C  
+ATOM     31  NZ  LYS A   4      21.983  14.615   1.386  1.00  0.00           N  
+ATOM     32  N   THR A   5      14.987  11.291  -1.258  1.00  0.00           N  
+ATOM     33  CA  THR A   5      13.743  11.499  -1.997  1.00  0.00           C  
+ATOM     34  C   THR A   5      13.055  12.771  -1.515  1.00  0.00           C  
+ATOM     35  O   THR A   5      13.321  13.233  -0.404  1.00  0.00           O  
+ATOM     36  CB  THR A   5      12.811  10.288  -1.845  1.00  0.00           C  
+ATOM     37  OG1 THR A   5      13.471   9.109  -2.303  1.00  0.00           O  
+ATOM     38  CG2 THR A   5      11.551  10.458  -2.682  1.00  0.00           C  
+ATOM     39  N   ILE A   6      12.204  13.342  -2.368  1.00  0.00           N  
+ATOM     40  CA  ILE A   6      11.486  14.567  -2.028  1.00  0.00           C  
+ATOM     41  C   ILE A   6      10.092  14.235  -1.503  1.00  0.00           C  
+ATOM     42  O   ILE A   6       9.291  13.608  -2.205  1.00  0.00           O  
+ATOM     43  CB  ILE A   6      11.402  15.519  -3.237  1.00  0.00           C  
+ATOM     44  CG1 ILE A   6      12.800  15.950  -3.693  1.00  0.00           C  
+ATOM     45  CG2 ILE A   6      10.543  16.732  -2.902  1.00  0.00           C  
+ATOM     46  CD1 ILE A   6      12.798  16.711  -5.010  1.00  0.00           C  
+ATOM     47  N   VAL A   7       9.830  14.635  -0.258  1.00  0.00           N  
+ATOM     48  CA  VAL A   7       8.532  14.388   0.364  1.00  0.00           C  
+ATOM     49  C   VAL A   7       7.736  15.690   0.344  1.00  0.00           C  
+ATOM     50  O   VAL A   7       8.281  16.766   0.104  1.00  0.00           O  
+END

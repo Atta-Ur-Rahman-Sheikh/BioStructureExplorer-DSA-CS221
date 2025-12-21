@@ -1,0 +1,15 @@
+# ninja log v6
+2651	2864	7879465498658977	BioStructureExplorer.exe	acb8b8382cfe7917
+51	1936	7879465472701443	CMakeFiles/BioStructureExplorer.dir/engine/protein/protein_parser.cpp.obj	aa0404bdd806307b
+34	1351	7879465472452665	CMakeFiles/BioStructureExplorer.dir/engine/dna/dna_search.cpp.obj	21bb92f50855d469
+45	2579	7879465472659748	CMakeFiles/BioStructureExplorer.dir/engine/graph/graph_analyzer.cpp.obj	5915df33b69e5f46
+38	2651	7879465472562651	CMakeFiles/BioStructureExplorer.dir/engine/evolution/mutation_simulator.cpp.obj	3e5a58aa8dcfb7e6
+3	20	7879465471887135	clean	d6542ab91c93f907
+28	1914	7879465472452665	CMakeFiles/BioStructureExplorer.dir/main.cpp.obj	1cb801129bda6ed6
+8	5101	7879730967569872	build.ninja	fa39f529a62eea6
+73	1459	7879730969860762	CMakeFiles/BioStructureExplorer.dir/engine/dna/dna_search.cpp.obj	21bb92f50855d469
+106	1748	7879730970177671	CMakeFiles/BioStructureExplorer.dir/engine/protein/protein_parser.cpp.obj	aa0404bdd806307b
+62	2112	7879730969618580	CMakeFiles/BioStructureExplorer.dir/main.cpp.obj	1cb801129bda6ed6
+95	2194	7879730970070865	CMakeFiles/BioStructureExplorer.dir/engine/graph/graph_analyzer.cpp.obj	5915df33b69e5f46
+84	2470	7879730969952338	CMakeFiles/BioStructureExplorer.dir/engine/evolution/mutation_simulator.cpp.obj	3e5a58aa8dcfb7e6
+2472	2844	7879730993850515	BioStructureExplorer.exe	18470df8e03e2d10

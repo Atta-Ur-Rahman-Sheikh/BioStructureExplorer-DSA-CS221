@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioStructure Explorer - Mutation Simulator</title>
+    <link rel="stylesheet" href="css/module-common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <style>
+:root {
+  --bg-main: #2C3930;
+  --bg-panel: #3F4F44;
+  --bg-light: #F5F7FA;
+  --accent: #A27B5C;
+  --accent2: #2ECC71;
+  --text-main: #DCD7C9;
+  --text-muted: #B0A394;
+  --radius: 12px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+html {
+    background-color: var(--bg-main);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-main);
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 5px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #8B6B4F;
+}
+
+.header {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
+.header a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+.header a i {
+    margin-right: 0.4rem;
+}
+
+.module-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.module-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.simulation-controls {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 0;
+    flex-wrap: wrap;
+    padding: 0.75rem;
+    background: var(--bg-panel);
+    border-radius: 8px;
+    flex: 1;
+}
+
+.control-btn {
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.control-btn#evolution-play,
+.control-btn#evolution-pause,
+.control-btn#evolution-step {
+    background: var(--accent);
+}
+.control-btn#evolution-play:hover,
+.control-btn#evolution-pause:hover,
+.control-btn#evolution-step:hover {
+    background: #8B6B4F;
+}
+.control-btn#evolution-reset {
+    background: #6c757d;
+}
+.control-btn#evolution-reset:hover {
+    background: #5a6268;
+}
+.control-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.control-btn:active {
+    transform: translateY(0);
+}
+
+.step-counter {
+    margin-left: 0.5rem;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+.simulation-controls input[type="range"],
+.simulation-controls select {
+    border-radius: 6px;
+    border: 1px solid rgba(162, 123, 92, 0.3);
+    padding: 0.5rem;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    transition: all 0.2s ease;
+}
+
+.simulation-controls input[type="range"]:focus,
+.simulation-controls select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(162, 123, 92, 0.2);
+}
+
+.simulation-controls label {
+    color: var(--text-main);
+    font-size: 0.9rem;
+}
+
+#evolution-growth-chart {
+    background: linear-gradient(135deg, var(--bg-panel) 0%, #2E3A34 100%);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(162, 123, 92, 0.15);
+    padding: 0.75rem;
+    display: none !important;
+    height: 0 !important;
+    margin: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+}
+
+.traversal-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.traversal-box {
+    background: linear-gradient(135deg, var(--bg-panel) 0%, #2E3A34 100%);
+    padding: 0.75rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(162, 123, 92, 0.15);
+    transition: all 0.2s ease;
+}
+
+.traversal-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.traversal-box h3 {
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+    font-size: 1rem;
+    font-weight: 600;
+    border-bottom: 1px solid rgba(162, 123, 92, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.visualization-panel .legend {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+.visualization-panel .legend h2 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin: 0;
+    font-weight: 600;
+}
+.visualization-panel .legend small {
+    color: var(--text-muted);
+}
+.visualization-panel .legend span {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-microscope"></i> Mutation Simulator</h1>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+
+    <div class="module-container">
+        <p class="module-description">
+            Simulates mutation spread over time using queue-based time steps and probability-based mutation and resistance.
+        </p>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <label for="evolution-file">Upload JSON Results (optional):</label>
+                <input type="file" id="evolution-file" accept=".json">
+            </div>
+            <div class="control-group">
+                <label for="evolution-grid-size-select">Grid Size:</label>
+                <select id="evolution-grid-size-select" style="padding: 0.5rem; border-radius: 6px; border: 1px solid rgba(162, 123, 92, 0.3); background-color: var(--bg-main); color: var(--text-main); font-size: 0.9rem;">
+                    <option value="8">8x8 (Small)</option>
+                    <option value="10" selected>10x10 (Medium)</option>
+                    <option value="12">12x12 (Large)</option>
+                    <option value="15">15x15 (X-Large)</option>
+                    <option value="20">20x20 (XX-Large)</option>
+                </select>
+            </div>
+            <div class="simulation-controls">
+                <button id="evolution-play" class="control-btn">
+                    <i class="fas fa-play"></i> Play
+                </button>
+                <button id="evolution-pause" class="control-btn">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+                <button id="evolution-step" class="control-btn">
+                    <i class="fas fa-step-forward"></i> Step
+                </button>
+                <button id="evolution-reset" class="control-btn">
+                    <i class="fas fa-redo"></i> Reset
+                </button>
+                <div class="step-counter">
+                    <span id="evolution-step-counter">0</span> / <span id="evolution-step-total">0</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem; flex: 1; min-width: 200px;">
+                    <label for="evolution-step-slider" style="font-size: 0.9rem; white-space: nowrap;">Step:</label>
+                    <input type="range" id="evolution-step-slider" min="0" max="0" value="0" style="flex: 1;">
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <label for="evolution-speed" style="font-size: 0.9rem; white-space: nowrap;">Speed:</label>
+                    <input type="range" id="evolution-speed" min="100" max="2000" value="500" step="100" style="width: 100px;">
+                    <span id="evolution-speed-value" style="font-size: 0.85rem; min-width: 45px;">500ms</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 0.5rem;">
+                    <label for="evolution-view" style="font-size: 0.9rem; white-space: nowrap;">View:</label>
+                    <select id="evolution-view" style="padding: 0.5rem; border-radius: 6px; border: 1px solid rgba(162, 123, 92, 0.3); background-color: var(--bg-main); color: var(--text-main); font-size: 0.9rem;">
+                        <option value="grid">Grid</option>
+                        <option value="heatmap">Heatmap</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-container">
+            <div class="traversal-panel">
+                <div class="traversal-box">
+                    <h3>Current State</h3>
+                    <div class="stats-panel" style="grid-template-columns: 1fr; gap: 0.4rem;">
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                                <i class="fas fa-circle" style="color: #ecf0f1;"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Normal</h3>
+                                <p id="evolution-normal-count" class="stat-value" style="font-size: 0.9rem;">-</p>
+                                <p id="evolution-normal-percent" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.1rem;">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem; background-color: rgba(231, 76, 60, 0.2);">
+                                <i class="fas fa-circle" style="color: #e74c3c;"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Mutated</h3>
+                                <p id="evolution-mutated-count" class="stat-value" style="font-size: 0.9rem;">-</p>
+                                <p id="evolution-mutated-percent" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.1rem;">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem; background-color: rgba(46, 204, 113, 0.2);">
+                                <i class="fas fa-circle" style="color: #2ecc71;"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Resistant</h3>
+                                <p id="evolution-resistant-count" class="stat-value" style="font-size: 0.9rem;">-</p>
+                                <p id="evolution-resistant-percent" style="font-size: 0.65rem; color: var(--text-muted); margin-top: 0.1rem;">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="visualization-panel">
+                <div class="legend">
+                    <h2 style="margin: 0; flex: 1; font-size: 1.1rem; color: var(--accent); font-weight: 600;">Mutation Grid</h2>
+                    <small>Legend: </small>
+                    <span style="background: #ecf0f1; color: #333; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Normal</span>
+                    <span style="background: #e74c3c; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Mutated</span>
+                    <span style="background: #2ecc71; color: white; padding: 0.25rem 0.5rem; border-radius: 4px; font-size: 0.8rem;">Resistant</span>
+                </div>
+                <div id="evolution-viz-container">
+                    <div id="evolution-2d-viz" class="viz-panel active"></div>
+                    <div id="evolution-3d-viz" class="viz-panel"></div>
+                </div>
+                <div id="evolution-growth-chart" style="display: none !important; height: 0; margin: 0; padding: 0; overflow: hidden;"></div>
+                
+                <div class="mutation-explanation" style="margin-top: 0.75rem; padding: 0.75rem; background: linear-gradient(135deg, rgba(63, 79, 68, 0.5) 0%, rgba(46, 58, 52, 0.5) 100%); border-radius: 8px; border: 1px solid rgba(162, 123, 92, 0.2);">
+                    <h3 style="color: var(--accent); font-size: 1rem; font-weight: 600; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-info-circle"></i> Understanding Mutation Spread
+                    </h3>
+                    <div style="font-size: 0.85rem; line-height: 1.6; color: var(--text-main);">
+                        <p style="margin-bottom: 0.5rem;">
+                            <strong style="color: var(--accent);">Normal Cells (Gray):</strong> Healthy cells that have not yet been affected by mutations. These cells are susceptible to mutation spread from neighboring mutated cells.
+                        </p>
+                        <p style="margin-bottom: 0.5rem;">
+                            <strong style="color: #e74c3c;">Mutated Cells (Red):</strong> Cells that have acquired genetic mutations. These cells can spread mutations to adjacent normal cells with a probability based on the mutation rate. Over time, mutated cells may develop resistance.
+                        </p>
+                        <p style="margin-bottom: 0.5rem;">
+                            <strong style="color: #2ecc71;">Resistant Cells (Green):</strong> Mutated cells that have developed resistance mechanisms. These cells are less likely to spread mutations but represent a more stable, evolved state. Resistance typically develops over multiple generations.
+                        </p>
+                        <p style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid rgba(162, 123, 92, 0.2); font-style: italic; color: var(--text-muted);">
+                            <i class="fas fa-lightbulb" style="margin-right: 0.5rem;"></i>
+                            <strong>Simulation Dynamics:</strong> The mutation spreads through the population using a queue-based time-step algorithm. Each step represents a generation where mutations can spread to neighbors, and existing mutations may develop resistance. Use the controls above to play, pause, or step through the simulation to observe how mutations evolve over time.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/module-common.js"></script>
+    <script type="module" src="js/evolution-visualization.js"></script>
+</body>
+</html>

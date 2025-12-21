@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioStructure Explorer - Protein Structure</title>
+    <link rel="stylesheet" href="css/module-common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://3dmol.csb.pitt.edu/build/3Dmol-min.js"></script>
+    <style>
+:root {
+  --bg-main: #2C3930;
+  --bg-panel: #3F4F44;
+  --bg-light: #F5F7FA;
+  --accent: #A27B5C;
+  --accent2: #2ECC71;
+  --text-main: #DCD7C9;
+  --text-muted: #B0A394;
+  --radius: 12px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+html {
+    background-color: var(--bg-main);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-main);
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 5px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #8B6B4F;
+}
+
+.header {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
+.header a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+.header a i {
+    margin-right: 0.4rem;
+}
+
+.module-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.module-description {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+}
+
+.controls-panel select,
+.controls-panel input[type="file"] {
+    padding: 0.75rem;
+    border: 1px solid rgba(162, 123, 92, 0.3);
+    border-radius: 8px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.controls-panel select:focus,
+.controls-panel input[type="file"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(162, 123, 92, 0.2);
+}
+
+#protein-chain-checkboxes {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+}
+
+#protein-chain-checkboxes label {
+    color: var(--text-main);
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+}
+
+#protein-chain-checkboxes label:hover {
+    background: rgba(162, 123, 92, 0.15);
+}
+
+#protein-chain-checkboxes input[type="checkbox"] {
+    cursor: pointer;
+}
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-atom"></i> Protein Structure</h1>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+
+    <div class="module-container">
+        <p class="module-description">
+            Parses PDB files to extract atom coordinates and structural information for 3D visualization.
+        </p>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <label for="protein-sample-select">Load Sample PDB:</label>
+                <select id="protein-sample-select">
+                    <option value="">-- Select a sample PDB file --</option>
+                    <option value="1A3N.pdb">1A3N.pdb</option>
+                    <option value="1GFL.pdb">1GFL.pdb</option>
+                    <option value="1LYZ.pdb">1LYZ.pdb</option>
+                    <option value="4INS.pdb">4INS.pdb</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="protein-file">Or Upload PDB/JSON File:</label>
+                <input type="file" id="protein-file" accept=".pdb,.json">
+            </div>
+            <div class="control-group">
+                <label for="protein-style">Display Style:</label>
+                <select id="protein-style">
+                    <option value="cartoon">Cartoon</option>
+                    <option value="stick">Stick</option>
+                    <option value="sphere">Sphere</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label for="protein-color-by">Color By:</label>
+                <select id="protein-color-by">
+                    <option value="spectrum">Spectrum</option>
+                    <option value="chain">Chain</option>
+                    <option value="residue">Residue Type</option>
+                    <option value="element">Element</option>
+                </select>
+            </div>
+            <div class="control-group" id="protein-chain-selector" style="display: none;">
+                <label>Chains:</label>
+                <div id="protein-chain-checkboxes" style="display: flex; gap: 0.5rem; flex-wrap: wrap;"></div>
+            </div>
+        </div>
+
+        <div class="results-container">
+            <div class="traversal-panel">
+                <div class="traversal-box">
+                    <h3>Structure Information</h3>
+                    <div class="stats-panel" style="grid-template-columns: 1fr; gap: 0.4rem;">
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">PDB ID</h3>
+                                <p id="protein-pdb-id" class="stat-value" style="font-size: 0.9rem;">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                                <i class="fas fa-atom"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Atom Count</h3>
+                                <p id="protein-atom-count" class="stat-value" style="font-size: 0.9rem;">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Chains</h3>
+                                <p id="protein-chains" class="stat-value" style="font-size: 0.9rem;">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="visualization-panel">
+                <div class="legend">
+                    <h2 style="margin: 0; flex: 1; font-size: 1.1rem; color: var(--accent); font-weight: 600;">3D Protein Structure</h2>
+                    <small style="color: var(--text-muted);">Rotate: Click & Drag | Zoom: Scroll</small>
+                </div>
+                <div id="protein-viz"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/module-common.js"></script>
+    <script src="js/protein-visualization.js"></script>
+</body>
+</html>

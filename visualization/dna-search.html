@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BioStructure Explorer - DNA Pattern Search</title>
+    <link rel="stylesheet" href="css/module-common.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+:root {
+  --bg-main: #2C3930;
+  --bg-panel: #3F4F44;
+  --bg-light: #F5F7FA;
+  --accent: #A27B5C;
+  --accent2: #2ECC71;
+  --text-main: #DCD7C9;
+  --text-muted: #B0A394;
+  --radius: 12px;
+  --space-sm: 8px;
+  --space-md: 16px;
+  --space-lg: 32px;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    overflow-x: hidden;
+}
+
+html {
+    background-color: var(--bg-main);
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-main);
+}
+
+html::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track {
+    background: var(--bg-main);
+}
+
+html::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 5px;
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background: #8B6B4F;
+}
+
+.header {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    padding: 0.75rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--accent);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+.header h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+}
+.header a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+}
+.header a i {
+    margin-right: 0.4rem;
+}
+
+.module-container {
+    max-width: 1400px;
+    margin: 1rem auto;
+    padding: 1rem;
+}
+
+.controls-panel input[type="text"] {
+    padding: 0.75rem;
+    border: 1px solid rgba(162, 123, 92, 0.3);
+    border-radius: 8px;
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
+
+.controls-panel input[type="text"]:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(162, 123, 92, 0.2);
+}
+
+.controls-panel button {
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: white;
+    transition: all 0.2s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+.controls-panel button#dna-zoom-in,
+.controls-panel button#dna-zoom-out {
+    background: var(--accent);
+}
+.controls-panel button#dna-zoom-in:hover,
+.controls-panel button#dna-zoom-out:hover {
+    background: #8B6B4F;
+}
+.controls-panel button#dna-zoom-reset {
+    background: #6c757d;
+}
+.controls-panel button#dna-zoom-reset:hover {
+    background: #5a6268;
+}
+.controls-panel button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+.controls-panel button:active {
+    transform: translateY(0);
+}
+
+#dna-match-items {
+    max-height: 300px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent) var(--bg-panel);
+}
+
+#dna-match-items::-webkit-scrollbar {
+    width: 6px;
+}
+
+#dna-match-items::-webkit-scrollbar-track {
+    background: var(--bg-panel);
+}
+
+#dna-match-items::-webkit-scrollbar-thumb {
+    background: var(--accent);
+    border-radius: 3px;
+}
+
+#dna-match-items li {
+    padding: 0.5rem 0.75rem;
+    margin-bottom: 0.4rem;
+    background: rgba(44, 57, 48, 0.5);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-main);
+    border-left: 3px solid transparent;
+    font-size: 0.85rem;
+}
+
+#dna-match-items li:hover {
+    background: rgba(162, 123, 92, 0.2);
+    color: var(--accent);
+    transform: translateX(5px);
+    border-left-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(162, 123, 92, 0.2);
+}
+
+#dna-viz-container {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(135deg, #2E3A34 0%, #1F2823 100%);
+    border-radius: 8px;
+    box-shadow: inset 0 2px 20px rgba(0,0,0,0.4), 0 2px 8px rgba(0,0,0,0.2);
+    border: 1px solid rgba(162, 123, 92, 0.2);
+    height: calc(100vh - 400px);
+    min-height: 500px;
+}
+
+.visualization-panel .legend {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.85rem;
+}
+.visualization-panel .legend h2 {
+    font-size: 1.1rem;
+    color: var(--accent);
+    margin: 0;
+    font-weight: 600;
+}
+.visualization-panel .legend small {
+    color: var(--text-muted);
+}
+.visualization-panel .legend span {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1><i class="fas fa-dna"></i> DNA Pattern Search</h1>
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+    </div>
+
+    <div class="module-container">
+        <p class="module-description">
+            Efficient pattern matching in DNA sequences using the Knuth-Morris-Pratt (KMP) algorithm.
+        </p>
+
+        <div class="controls-panel">
+            <div class="control-group">
+                <label for="dna-file">Upload DNA Sequence (optional):</label>
+                <input type="file" id="dna-file" accept=".json,.fasta,.fa,.fna">
+            </div>
+            <div class="control-group">
+                <label for="dna-search-pattern">Search Pattern:</label>
+                <input type="text" id="dna-search-pattern" placeholder="Enter pattern to search...">
+            </div>
+            <div class="control-group" style="flex-direction: row; align-items: center; gap: 0.5rem;">
+                <button id="dna-zoom-in"><i class="fas fa-search-plus"></i></button>
+                <button id="dna-zoom-out"><i class="fas fa-search-minus"></i></button>
+                <button id="dna-zoom-reset">Reset</button>
+            </div>
+        </div>
+
+        <div class="results-container">
+            <div class="traversal-panel">
+                <div class="traversal-box">
+                    <h3>Search Information</h3>
+                    <div class="stats-panel" style="grid-template-columns: 1fr; gap: 0.4rem;">
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                                <i class="fas fa-ruler-horizontal"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Sequence Length</h3>
+                                <p id="dna-length" class="stat-value" style="font-size: 0.9rem;">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Pattern</h3>
+                                <p id="dna-pattern" class="stat-value" style="font-size: 0.9rem;">-</p>
+                            </div>
+                        </div>
+                        <div class="stat-card" style="padding: 0.5rem;">
+                            <div class="stat-icon" style="width: 32px; height: 32px; font-size: 0.9rem; margin-bottom: 0.3rem;">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <h3 style="font-size: 0.75rem; margin-bottom: 0.2rem;">Matches Found</h3>
+                                <p id="dna-matches" class="stat-value" style="font-size: 0.9rem;">-</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="traversal-box" style="margin-top: 0.75rem;">
+                    <h3>Match Positions (<span id="dna-match-count">0</span>)</h3>
+                    <ul id="dna-match-items" style="list-style: none; padding: 0; margin: 0; max-height: 300px; overflow-y: auto;"></ul>
+                </div>
+            </div>
+
+            <div class="visualization-panel">
+                <div class="legend">
+                    <h2 style="margin: 0; flex: 1; font-size: 1.1rem; color: var(--accent); font-weight: 600;">DNA Sequence Visualization</h2>
+                    <small style="color: var(--text-muted);">Legend: </small>
+                    <span style="background: #4caf50; color: white; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.75rem;">A</span>
+                    <span style="background: #f44336; color: white; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.75rem;">T</span>
+                    <span style="background: #2196f3; color: white; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.75rem;">G</span>
+                    <span style="background: #ffeb3b; color: #333; padding: 0.2rem 0.4rem; border-radius: 3px; font-size: 0.75rem;">C</span>
+                </div>
+                <div id="dna-viz-container">
+                    <div id="dna-2d-viz" class="viz-panel active"></div>
+                    <div id="dna-3d-viz" class="viz-panel"></div>
+                </div>
+                
+                <div class="dna-explanation" style="margin-top: 0.75rem; padding: 0.75rem; background: linear-gradient(135deg, rgba(63, 79, 68, 0.5) 0%, rgba(46, 58, 52, 0.5) 100%); border-radius: 8px; border: 1px solid rgba(162, 123, 92, 0.2);">
+                    <h3 style="color: var(--accent); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem;">
+                        <i class="fas fa-info-circle"></i> Understanding DNA Pattern Search
+                    </h3>
+                    <div style="font-size: 0.8rem; line-height: 1.5; color: var(--text-main);">
+                        <p style="margin-bottom: 0.4rem;">
+                            <strong style="color: var(--accent);">KMP Algorithm:</strong> The Knuth-Morris-Pratt algorithm efficiently searches for patterns in DNA sequences by avoiding unnecessary character comparisons. It uses a prefix function to skip ahead when mismatches occur.
+                        </p>
+                        <p style="margin-bottom: 0.4rem;">
+                            <strong style="color: var(--accent);">Color Coding:</strong> Each DNA base is color-coded: <span style="color: #4caf50; font-weight: bold;">A</span> (Adenine), <span style="color: #f44336; font-weight: bold;">T</span> (Thymine), <span style="color: #2196f3; font-weight: bold;">G</span> (Guanine), <span style="color: #ffeb3b; font-weight: bold;">C</span> (Cytosine). Matched patterns are highlighted in yellow.
+                        </p>
+                        <p style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid rgba(162, 123, 92, 0.2); font-style: italic; color: var(--text-muted); font-size: 0.75rem;">
+                            <i class="fas fa-lightbulb" style="margin-right: 0.4rem;"></i>
+                            <strong>Tip:</strong> Enter a pattern in the search box above to find all occurrences in the sequence. Click on match positions in the sidebar to navigate to them.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/module-common.js"></script>
+    <script src="js/dna-visualization.js"></script>
+</body>
+</html>
