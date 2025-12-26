@@ -162,15 +162,15 @@ The project includes pre-generated sample data in the `output/` directory:
 ## Project Screenshots
 
 <p align="center">
-  <img src="./screenshots/screenshot1.png" width="45%" />
-  <img src="./screenshots/screenshot2.png" width="45%" />
+  <img src="./screenshots/screenshot1.png" width="49%" />
+  <img src="./screenshots/screenshot2.png" width="49%" />
 </p>
 <p align="center">
-  <img src="./screenshots/screenshot3.png" width="45%" />
-  <img src="./screenshots/screenshot4.png" width="45%" />
+  <img src="./screenshots/screenshot3.png" width="49%" />
+  <img src="./screenshots/screenshot4.png" width="49%" />
 </p>
 <p align="center">
-  <img src="./screenshots/screenshot5.png" width="45%" />
+  <img src="./screenshots/screenshot5.png" width="49%" />
 </p>
 
 ## Requirements
@@ -187,5 +187,7 @@ This project is released under the MIT License.
 
 - This project was developed as part of a Data Structures & Algorithms course
 - Sample datasets are provided for educational purposes only
+
+##
 
 <p align="center"> <strong>BioStructure Explorer</strong><br/> Bridging the Gap between Computational Logic & Biological Insight </p>
