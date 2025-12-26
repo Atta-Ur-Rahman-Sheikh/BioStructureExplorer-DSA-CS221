@@ -47,3 +47,4 @@ namespace dna
 } // namespace dna
 
 #endif // DNA_SEARCH_H
+

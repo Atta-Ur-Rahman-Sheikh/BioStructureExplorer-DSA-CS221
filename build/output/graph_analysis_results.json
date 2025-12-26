@@ -1,0 +1,347 @@
+{
+  "nodes": [
+    {
+      "centrality": 0.160000,
+      "degree": 4,
+      "id": "A"
+    },
+    {
+      "centrality": 0.160000,
+      "degree": 4,
+      "id": "B"
+    },
+    {
+      "centrality": 0.160000,
+      "degree": 4,
+      "id": "C"
+    },
+    {
+      "centrality": 0.160000,
+      "degree": 4,
+      "id": "D"
+    },
+    {
+      "centrality": 0.120000,
+      "degree": 3,
+      "id": "E"
+    },
+    {
+      "centrality": 0.120000,
+      "degree": 3,
+      "id": "F"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "G"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "H"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "I"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "J"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "K"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "L"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "M"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "N"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "O"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "P"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "Q"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "R"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "S"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "T"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "U"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "V"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "W"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "X"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "Y"
+    },
+    {
+      "centrality": 0.080000,
+      "degree": 2,
+      "id": "Z"
+    }
+  ],
+  "edges": [
+    {
+      "source": "A",
+      "target": "B",
+      "weight": 0.950000
+    },
+    {
+      "source": "A",
+      "target": "C",
+      "weight": 0.870000
+    },
+    {
+      "source": "A",
+      "target": "D",
+      "weight": 0.920000
+    },
+    {
+      "source": "B",
+      "target": "E",
+      "weight": 0.890000
+    },
+    {
+      "source": "B",
+      "target": "F",
+      "weight": 0.940000
+    },
+    {
+      "source": "C",
+      "target": "G",
+      "weight": 0.880000
+    },
+    {
+      "source": "C",
+      "target": "H",
+      "weight": 0.910000
+    },
+    {
+      "source": "D",
+      "target": "I",
+      "weight": 0.850000
+    },
+    {
+      "source": "D",
+      "target": "J",
+      "weight": 0.900000
+    },
+    {
+      "source": "E",
+      "target": "K",
+      "weight": 0.860000
+    },
+    {
+      "source": "F",
+      "target": "L",
+      "weight": 0.930000
+    },
+    {
+      "source": "G",
+      "target": "M",
+      "weight": 0.840000
+    },
+    {
+      "source": "H",
+      "target": "N",
+      "weight": 0.820000
+    },
+    {
+      "source": "I",
+      "target": "O",
+      "weight": 0.810000
+    },
+    {
+      "source": "J",
+      "target": "P",
+      "weight": 0.790000
+    },
+    {
+      "source": "K",
+      "target": "Q",
+      "weight": 0.880000
+    },
+    {
+      "source": "L",
+      "target": "R",
+      "weight": 0.870000
+    },
+    {
+      "source": "M",
+      "target": "S",
+      "weight": 0.830000
+    },
+    {
+      "source": "N",
+      "target": "T",
+      "weight": 0.800000
+    },
+    {
+      "source": "O",
+      "target": "U",
+      "weight": 0.890000
+    },
+    {
+      "source": "P",
+      "target": "V",
+      "weight": 0.920000
+    },
+    {
+      "source": "Q",
+      "target": "W",
+      "weight": 0.910000
+    },
+    {
+      "source": "R",
+      "target": "X",
+      "weight": 0.850000
+    },
+    {
+      "source": "S",
+      "target": "Y",
+      "weight": 0.830000
+    },
+    {
+      "source": "T",
+      "target": "Z",
+      "weight": 0.880000
+    },
+    {
+      "source": "U",
+      "target": "A",
+      "weight": 0.820000
+    },
+    {
+      "source": "V",
+      "target": "B",
+      "weight": 0.790000
+    },
+    {
+      "source": "W",
+      "target": "C",
+      "weight": 0.900000
+    },
+    {
+      "source": "X",
+      "target": "D",
+      "weight": 0.870000
+    },
+    {
+      "source": "Y",
+      "target": "E",
+      "weight": 0.840000
+    },
+    {
+      "source": "Z",
+      "target": "F",
+      "weight": 0.810000
+    }
+  ],
+  "bfs_order": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "U",
+    "E",
+    "F",
+    "V",
+    "G",
+    "H",
+    "W",
+    "I",
+    "J",
+    "X",
+    "O",
+    "K",
+    "Y",
+    "L",
+    "Z",
+    "P",
+    "M",
+    "N",
+    "Q",
+    "R",
+    "S",
+    "T"
+  ],
+  "dfs_order": [
+    "A",
+    "B",
+    "E",
+    "K",
+    "Q",
+    "W",
+    "C",
+    "G",
+    "M",
+    "S",
+    "Y",
+    "H",
+    "N",
+    "T",
+    "Z",
+    "F",
+    "L",
+    "R",
+    "X",
+    "D",
+    "I",
+    "O",
+    "U",
+    "J",
+    "P",
+    "V"
+  ]
+}

@@ -159,3 +159,4 @@ function handleProteinFileUpload(event) {
         reader.readAsText(file);
     }
 }
+

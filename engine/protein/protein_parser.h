@@ -60,3 +60,4 @@ namespace protein
 } // namespace protein
 
 #endif // PROTEIN_PARSER_H
+

@@ -44,3 +44,4 @@ file(GLOB_RECURSE HEADERS
 
 # Create executable
 add_executable(BioStructureExplorer main.cpp ${SOURCES} ${HEADERS})
+
