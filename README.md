@@ -1,4 +1,11 @@
-# BioStructure Explorer - DSA Project
+# <img src="./sticker.svg" width="30%" align="right" />BioStructure Explorer - DSA Project
+
+<p align="left">
+  <img src="https://img.shields.io/badge/Language-C%2B%2B17-indigo?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Domain-Computational%20Biology-teal?style=for-the-badge" />
+   <img src="https://img.shields.io/badge/Focus-Data%20Structures%20%26%20Algorithms-tan?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/License-MIT-brown?style=for-the-badge" />
+</p>
 
 A high-fidelity C++ engine for interpretable computational biology and bio-structural dynamics in molecular, genomic, and network simulations.
 
@@ -166,3 +173,5 @@ This project is released under the MIT License.
 
 - This project was developed as part of a Data Structures & Algorithms course
 - Sample datasets are provided for educational purposes only
+
+<p align="center"> <strong>BioStructure Explorer</strong><br/> Bridging the Gap between Computational Logic & Biological Insight </p>
